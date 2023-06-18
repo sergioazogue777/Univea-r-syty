@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Univea(r)syty</title>
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    <link href="/scss/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar bg-dark navbar-expand-md d-flex navbar-dark" id="nav">
+        &nbsp;&nbsp;
+
+        <div class="d-flex  align-items-center flex-grow-1 flex-shrink-0 justify-content-start">
+            &nbsp;&nbsp;&nbsp;
+            <img class="logo rounded d-inline" href="http://localhost:8081/" src="/images/logo.png">
+            &nbsp;&nbsp;
+            <h2 class="d-inline display-1" id="titulo">Univea(r)syty</h2>
+        </div>
+
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <div class="collapse p-4 navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center mx-4 text-center d-flex justify-content-end mr-2">
+                <li class="nav-item active button ">
+                    <a class="nav-link p-sm-2 p-4 text-secondary btn btn-primary" href="http://localhost:8081/">Inicio</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item button dropdown">
+                    <a class="nav-link p-sm-2 p-4 text-secondary btn btn-primary dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Estudio
+                    </a>
+                    <ul class="dropdown-menu bg-primary mt-1">
+                        <li><a class="dropdown-item text-secondary" href="http://localhost:8081/matematicas">Matematicas</a></li>
+                        <li><a class="dropdown-item text-secondary" href="http://localhost:8081/castellano">Castellano</a></li>
+                        <li><a class="dropdown-item text-secondary" href="http://localhost:8081/historia">Historia</a></li>
+                        <li><a class="dropdown-item text-secondary" href="http://localhost:8081/fisica">Fisica</a></li>
+                    </ul>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item active button">
+                    <a class="nav-link p-sm-2 p-4 text-secondary btn btn-primary" href="http://localhost:8081/nosotros">Nosotros</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                {{#if registrado}}
+                <p class="text-secondary mt-3">
+                    Bienvenido, {{registrado}} :)
+                </p>
+                {{else}}
+                <button type="button" class="btn mx-auto text-primary btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#registro">
+                    Identificate
+                </button>
+                <div class="modal fade" id="registro" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Identificate</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="http://localhost:8081/login">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                                        <input type="email" name="correo" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                                        <input type="password" name="contrasenya" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary">Entrar</button>
+                                    <div class="form-text mt-2">
+                                        ¿No tienes cuenta? <a class="text-secondary" href="http://localhost:8081/registrar">Registrate.</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{/if}}
+
+            </ul>
+        </div>
+    </nav>

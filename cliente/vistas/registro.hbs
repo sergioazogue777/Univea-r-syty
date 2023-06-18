@@ -1,0 +1,41 @@
+{{>cabeza}}
+<div class="row mt-4 justify-content-center">
+    <div class="col-7 col-md-5 col-sm-5 rounded bg-light text-center">
+        <h3 class="display-3">
+            Registro
+        </h3>
+        <hr>
+        <form method="post" action="http://localhost:8081/registrar">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="nombre">
+            </div>
+            <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" name="apellidos" class="form-control" id="apellidos">
+            </div>
+            <div class="mb-3">
+                <label for="nacimiento" class="form-label">Fecha de nacimiento</label>
+                <input type="date" name="nacimiento" class="form-control" id="nacimiento">
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo electronico</label>
+                <input type="email" name="correo" class="form-control" id="correo" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="contrasenya" class="form-control" id="password">
+            </div>
+            {{#if status}}
+            <p class="text-danger display-5">
+                Correo ya en uso
+            </p>
+            {{/if}}
+            <button type="submit" class="btn mb-3 btn-secondary">Registrarse</button>
+        </form>
+    </div>
+</div>
+
+
+
+{{>pie}}

@@ -1,0 +1,25 @@
+{{>cabeza}}
+<div class="row justify-content-center mt-5">
+    <div class="col text-center col-6">
+        <h1 class="display-3 mb-5 text-danger">
+            AVISO: debes iniciar sesión para poder acceder a los contenidos
+        </h1>
+        <hr>
+        <form class="mt-5 rounded bg-light mb-5 p-3" method="post" action="http://localhost:8081/login">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                <input type="email" name="correo" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input type="password" name="contrasenya" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-secondary">Entrar</button>
+            <div class="form-text mt-2">
+                ¿No tienes cuenta? <a class="text-secondary" href="http://localhost:8081/registrar">Registrate.</a>
+            </div>
+        </form>
+    </div>
+</div>
+{{>pie}}

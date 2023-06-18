@@ -1,0 +1,128 @@
+{{>cabeza}}
+{{#if esProfesor}}
+{{else}}
+<div class="row mt-5  mx-auto  mb-5 justify-content-center align-items-center">
+    <div class="col-8 col-md-4 col-sm-6 col-lg-4 rounded bg-dark p-4 justify-content-center align-items-center">
+
+        <form method="post" action="http://localhost:8081/fisica/profesores" class="mx-auto"
+            enctype="multipart/form-data">
+            <div class="">
+                <h4 class="text-center text-secondary">
+                    Date de alta como profesor :)
+                </h4>
+                <hr>
+                <label for="telefono" class="text-secondary form-label">Número de teléfono:</label>
+                <input type="text" value="+34 " class="form-control" name="telefono" id="telefono"
+                    aria-describedby="emailHelp">
+                <label for="ciudad" class="text-secondary form-label">Ciudad:</label>
+                <input type="text" class="form-control" name="ciudad" id="ciudad" aria-describedby="emailHelp">
+                <label for="email" class="text-secondary form-label">E-mail:</label>
+                <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                <label for="descripcion" class="text-secondary form-label">Una descripción tuya:</label>
+                <textarea name="descripcion" id="descripcion" class="form-control"
+                    aria-label="With textarea"></textarea>
+                <input class=" mt- 3 form-check-input" type="radio" name="online" id="online">
+                <label class="form-label text-secondary" for="online">
+                    ¿Das clases online?
+                </label>
+                <br>
+                <label for="foto" class="text-secondary form-label">Una foto tuya:</label>
+
+                <input type="file" class="form-control" name="foto" id="foto" aria-describedby="emailHelp">
+
+                <button type="submit" class="btn mt-2 btn-secondary">Darse de alta</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/if}}
+
+
+<div class="row mt-3  justify-content-center align-items-center">
+    <div class="col col-8 text-center justify-content-center">
+
+        <h3 class=" text-center display-3">
+            Academias
+        </h3>
+        <hr>
+    </div>
+</div>
+<div class="row  mx-auto  mb-5 justify-content-center">
+    <div class=" col-7 mx-auto col-md-5 col-sm-7 col-lg-4 rounded p-2 justify-content-center align-items-center">
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="/images/logoAcademia1.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Academia Quina</h5>
+                <span class="badge text-bg-secondary">Mejor valorado</span>
+                <p class="mt-2 card-text">Academia situada en el centro de Castellón. Plaza Fadrell.
+                    Especializada en clases para Universitarios . ADEM-FICO-ECONOMICAS-INGENIERIAS ETC....
+                    Con mas de 25 años de actividad.</p>
+                <a href="https://academiaquina.es" class="btn btn-primary">Ir a la página</a>
+            </div>
+        </div>
+    </div>
+    <div class=" col-7 mx-auto col-md-5 col-sm-7 col-lg-4 rounded p-2 justify-content-center align-items-center">
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="/images/logoAcademia2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Academia estudi</h5>
+                <span class="badge text-bg-success">Promocionado</span>
+                <p class="mt-2 card-text">En el corazón de Castellón, y con más de 30 años de experiencia, se encuentra
+                    uno
+                    de los centros educativos más prestigiosos de la provincia.</p>
+                <a href="https://academiaestudi.net" class="btn btn-primary">Ir a la página</a>
+            </div>
+        </div>
+    </div>
+    <div class=" col-7 mx-auto col-md-5 col-sm-7 col-lg-4 rounded p-2 justify-content-center align-items-center">
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="/images/logoAcademia3.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Academia Agora</h5>
+                <span class="badge text-bg-success">Promocionado</span>
+                <p class=" mt-2 card-text">Academias de primaria eso y bachillerato ÁGORA CENTRE D'ESTUDIS es un negocio
+                    ubicado en Madrid, 10 BAJO, Castelló de la Plana.</p>
+                <a href="https://www.paginasamarillas.es/f/castello-de-la-plana/agora-centre-d-estudis_165191131_000000001.html"
+                    class="btn btn-primary">Ir a la página</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3  justify-content-center align-items-center">
+    <div class="col col-8 justify-content-center">
+
+        <h3 class=" text-center display-3">
+            Profesores
+        </h3>
+        <hr>
+    </div>
+</div>
+
+<div class="row  mx-auto  mb-5 justify-content-center align-items-center">
+    {{#each profesores}}
+    <div class="col m-auto col-md-7 col-sm-8 col-lg-6 rounded p-2 justify-content-center align-items-center">
+        <div class="card m-auto mb-3" style="max-width: 28rem;min-width: 27rem;">
+            <div class="row g-0 align-content-center">
+                <div class="col-md-5 d-flex fondoImagenes rounded align-items-center justify-content-center">
+                    <img src="/apuntes/{{this.id}}.jpg" class="m-auto p-3 img-fluid rounded">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.nombre}} {{this.apellidos}}</h5>
+                        <hr>
+                        <p class="card-text">{{this.descripcion}}</p>
+                        <p><img class="icono" src="/images/iconoLocalizacion.png">&nbsp;{{this.ciudad}}</p>
+                        <p><img class="icono" src="/images/iconoEmail.png">&nbsp;{{this.email}}</p>
+                        <p><img class="icono" src="/images/iconoTelefono.png">&nbsp;{{this.telefono}}</p>
+                        {{#if this.online}}
+                        <p><img class="icono" src="/images/iconoOnline.png">&nbsp;Posibilidad de clase on-line.</p>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{>pie}}

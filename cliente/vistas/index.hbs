@@ -1,0 +1,120 @@
+{{> cabeza}}
+<div class="row mt-0 mt-sm-5 justify-content-center align-items-center">
+  <div class="col col-sm-10 col-md-8 col-lg-6">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/images/portada.jpg" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="display-1">Temario</h3>
+            <p>Accede a los temarios de los que te examinaras en selectividad.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/images/portada2.jpg" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="display-1 ">Comunidad</h3>
+            <p>Comparte apuntes e ideas con compañeros.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/images/portada3.jpg" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="display-1">Profesores</h3>
+            <p>Accede y contacta con profesores y academias.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row mt-5  mb-5 justify-content-center align-items-center">
+  <div class="col col-sm-10 justify-content-center col-md-8 col-lg-6">
+    <ul class="list-group">
+      <li class="list-group-item bg-secondary p-3">
+        
+        <h3 class="text-center text-light  text-lg">
+          <img class="iconoGrande" src="/images/iconoExamen.png">
+          Accede a los examenes de otros años y a todos los temarios de las asigaturas a las que te presentes
+        </h3>
+      </li>
+      <li class="list-group-item p-3 bg-secondary">
+        <h3 class="text-center text-light  text-lg">
+          <img class="iconoGrande" src="/images/iconoApuntes.png">
+          Comparte y descarga apuntes de otros compañeros.
+        </h3>
+      </li>
+      <li class="list-group-item p-3 bg-secondary">
+        <h3 class="text-center text-light  text-lg">
+          <img class="iconoGrande" src="/images/iconoProfesor.png">
+          Contacta con profesores y academias cerca de ti para una ayuda adicional.
+        </h3>
+      </li>
+      <li class="list-group-item d-flex p-3 bg-secondary justify-content-center">
+        <h3 class="text-center text-light  text-lg">
+          <img class="iconoGrande" src="/images/iconoLogIn.png">
+          Registrate para poder acceder a toda la web
+        </h3>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row mt-3  mb-5 justify-content-center align-items-center">
+  <div class="col col-8 justify-content-center">
+    <hr>
+
+    <h3 class=" text-center display-3">
+      Escoge un plan
+    </h3>
+  </div>
+  <div class="row mt-3  mb-5 justify-content-center align-items-center">
+    <div class=" col-sm-8 col-md-7 col-lg-3  text-center justify-content-center">
+      <div class="card mx-auto" style="width: 15rem;">
+        <img src="/images/plan1.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Plan básico</h5>
+          <p class="card-text">Acceso a apuntes limitado a 1 semanal. Con anuncios. </p>
+        </div>
+      </div>
+    </div>
+
+    <div class=" col-sm-8 mt-sm-3 col-md-7 col-lg-3  text-center justify-content-center">
+      <div class="card mx-auto" style="width: 15rem;">
+        <img src="/images/plan2.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Plan premium</h5>
+          <p class="card-text">Acceso a apuntes, materias y profesores ilimitado. Sin anuncios.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if registrado}}
+  {{else}}
+  <a class="text-center" href="http://localhost:8081/registrar">
+    <button type="button" class="btn mx-auto mt-2 text-primary btn-secondary">
+      Registrate
+    </button>
+  </a>
+  {{/if}}
+</div>
+
+
+{{> pie}}

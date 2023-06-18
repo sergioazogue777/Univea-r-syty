@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Thasadith:wght@700&display=swap');
+
+$dark:#efd6bc;
+$primary:#f9ecdf;
+$font-family-base: 'Thasadith', sans-serif;
+$secondary: #194679;
+$body-bg:#f9ecdf;
+$component-active-color: $secondary;
+body{
+    margin:0px;
+padding:0px;
+width:100%;
+}
+#titulo{
+    font-weight:400;
+    color: rgb(42, 65, 87);
+    font-family: 'Neucha', cursive;
+}
+.logo{
+    height: 100px;
+    width: 100px;
+}
+.icono{
+    height:20px;
+    width: 20px;
+}
+.iconoGrande{
+    height:50px;
+    width: 50px;
+}
+.fondoImagenes{
+    background-color: #e3e3e3;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss"

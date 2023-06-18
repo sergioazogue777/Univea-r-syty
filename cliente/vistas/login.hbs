@@ -1,0 +1,23 @@
+{{>cabeza}}
+    <div class="row mt-5">
+        <div class="col">
+            <form method="POST" action="/login">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                    <input type="email" name="correo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">>:)</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <input type="password" name="contrasenya" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </form>
+        </div>
+    </div>
+    {{#if status}}
+        <h2 class="display-2 text-danger">
+            {{status}}
+        </h2>
+    {{/if}}
+{{>pie}}

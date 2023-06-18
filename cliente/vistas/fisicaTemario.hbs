@@ -1,0 +1,95 @@
+{{>cabeza}}
+<div class="row mt-5 justify-content-center">
+    <div class="col  col-md-5 col-sm-7 mx-auto rounded bg-dark p-3">
+        <h3 class="display-3 text-center">
+            Examenes por años
+        </h3>
+        <hr>
+        <h4>
+            Física
+        </h4>
+        <div class=" mt-3 accordion accordion-flush" id="fisica">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#fisica2022" aria-expanded="false" aria-controls="flush-collapseOne">
+                        2022
+                    </button>
+                </h2>
+                <div id="fisica2022" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#fisica">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            <a href="http://localhost:8081/fisica/temario?archivo=fisica_junio2022">
+                                <li class="list-group-item">Junio (ordinaria)</li>
+                            </a>
+                            <a href="http://localhost:8081/fisica/temario?archivo=fisica_julio2022">
+                                <li class="list-group-item">Julio (extraordinaria)</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#fisica2021" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        2021
+                    </button>
+                </h2>
+                <div id="fisica2021" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#fisica">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            <a href="http://localhost:8081/fisica/temario?archivo=fisica_junio2021">
+                                <li class="list-group-item">Junio (ordinaria)</li>
+                            </a>
+                            <a href="http://localhost:8081/fisica/temario?archivo=fisica_julio2021">
+                                <li class="list-group-item">Julio (extraordinaria)</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#fisica2020" aria-expanded="false" aria-controls="flush-collapseThree">
+                        2020
+                    </button>
+                </h2>
+                <div id="fisica2020" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                    data-bs-parent="#fisica">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            <a href="http://localhost:8081/fisica/temario?archivo=fisica_junio2020">
+                                <li class="list-group-item">Junio (ordinaria)</li>
+                            </a>
+                            <a href="http://localhost:8081/fisica/temario?archivo=fisica_julio2020">
+                                <li class="list-group-item">Julio (extraordinaria)</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mt-md-0 mt-sm-3 mb-sm-3 col-md-5 col-sm-7  mx-auto rounded p-3">
+        <h3 class="display-3 text-center">
+            Contenidos
+        </h3>
+        <hr>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Interacción gravitatoria</li>
+                    <li class="list-group-item">Interacción electromagnética</li>
+                    <li class="list-group-item">Ondas</li>
+                    <li class="list-group-item">Luz y Ondas electromagnéticas</li>
+                    <li class="list-group-item">Óptica Geométrica y física moderna</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{{>pie}}
