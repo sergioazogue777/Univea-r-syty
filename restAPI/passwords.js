@@ -5,8 +5,8 @@ const KEY_LENGTH = 64;
 const PREFIX = 'scrypt';
 
 async function hashPassword(password) {
-  if (typeof password !== 'string' || password.length < 8) {
-    throw new TypeError('Password must contain at least 8 characters');
+  if (typeof password !== 'string' || password.length === 0) {
+    throw new TypeError('Password must be a nonempty string');
   }
   const salt = randomBytes(16).toString('hex');
   const derived = await deriveKey(password, salt, KEY_LENGTH);
