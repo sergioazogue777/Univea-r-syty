@@ -5,7 +5,7 @@ const axios = require('axios')
 const path = require('path')
 const multer = require('multer');
 const descargar = require("./descargar.js")
-var upload = multer({ dest: 'public/apuntes/' });
+const upload = multer({ dest: 'public/apuntes/', limits: { fileSize: 10 * 1024 * 1024 } });
 
 router.get("/", (req, res) => {
     if (req.session.token) {
@@ -18,13 +18,13 @@ router.get("/registrar", (req, res) => {
     res.render("registro")
 })
 router.post("/registrar", async (req, res) => {
-    usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya, nombre: req.body.nombre, apellidos: req.body.apellidos, nacimiento: req.body.nacimiento }
+    const usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya, nombre: req.body.nombre, apellidos: req.body.apellidos, nacimiento: req.body.nacimiento }
     await axios.post("http://localhost:2005/registrar", { usuario }).then(respuesta => {
         console.log(respuesta.data)
         if (respuesta.data.status == "error") {
             res.render("registro", { status: respuesta.data.info })
         } else {
-            usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya }
+            const usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya }
             axios.post("http://localhost:2005/validar", { usuario }).then(respuesta => {
                 if (respuesta.data.token) {
                     req.session.token = respuesta.data.token
@@ -33,9 +33,11 @@ router.post("/registrar", async (req, res) => {
                 } else {
                     res.render("login", { status: "Usuario no encontrado" })
                 }
-            })
+            }).catch(() => res.status(502).render("registro", { status: "No se ha podido iniciar sesión" }))
         }
-    })
+    }).catch(err => res.status(err.response?.status === 400 ? 400 : 502).render("registro", {
+        status: err.response?.data?.info || "No se ha podido completar el registro"
+    }))
 })
 router.get("/matematicas", (req, res) => {
     if (req.session.token) {
@@ -48,8 +50,8 @@ router.get("/matematicas", (req, res) => {
 router.get("/matematicas/temario", (req, res) => {
     if (req.session.token) {
         if (req.query.archivo) {
-            rutaArchivo = descargar(req.query.archivo)
-            nombreDescarga = `${req.query.archivo}.pdf`
+            const rutaArchivo = descargar(req.query.archivo)
+            const nombreDescarga = `${req.query.archivo}.pdf`
             res.download(rutaArchivo, nombreDescarga, (err) => {
                 if (err) {
                     console.error('Error al descargar el archivo:', err);
@@ -68,10 +70,10 @@ router.get("/matematicas/temario", (req, res) => {
 router.get("/matematicas/comunidad", async (req, res) => {
     if (req.session.token) {
         if (req.query.apunte) {
-            idApunte = req.query.apunte
+            const idApunte = req.query.apunte
             axios.post("http://localhost:2005/recibirApunte", { idApunte }).then(respuesta => {
                 var apunte = respuesta.data.apunte
-                rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
+                const rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
                 res.download(rutaArchivo, apunte.nombreArchivo, (err) => {
                     if (err) {
                         console.error('Error al descargar el archivo:', err);
@@ -182,8 +184,8 @@ router.get("/historia", (req, res) => {
 router.get("/historia/temario", (req, res) => {
     if (req.session.token) {
         if (req.query.archivo) {
-            rutaArchivo = descargar(req.query.archivo)
-            nombreDescarga = `${req.query.archivo}.pdf`
+            const rutaArchivo = descargar(req.query.archivo)
+            const nombreDescarga = `${req.query.archivo}.pdf`
             res.download(rutaArchivo, nombreDescarga, (err) => {
                 if (err) {
                     console.error('Error al descargar el archivo:', err);
@@ -202,10 +204,10 @@ router.get("/historia/temario", (req, res) => {
 router.get("/historia/comunidad", async (req, res) => {
     if (req.session.token) {
         if (req.query.apunte) {
-            idApunte = req.query.apunte
+            const idApunte = req.query.apunte
             axios.post("http://localhost:2005/recibirApunte", { idApunte }).then(respuesta => {
                 var apunte = respuesta.data.apunte
-                rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
+                const rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
                 res.download(rutaArchivo, apunte.nombreArchivo, (err) => {
                     if (err) {
                         console.error('Error al descargar el archivo:', err);
@@ -316,8 +318,8 @@ router.get("/fisica", (req, res) => {
 router.get("/fisica/temario", (req, res) => {
     if (req.session.token) {
         if (req.query.archivo) {
-            rutaArchivo = descargar(req.query.archivo)
-            nombreDescarga = `${req.query.archivo}.pdf`
+            const rutaArchivo = descargar(req.query.archivo)
+            const nombreDescarga = `${req.query.archivo}.pdf`
             res.download(rutaArchivo, nombreDescarga, (err) => {
                 if (err) {
                     console.error('Error al descargar el archivo:', err);
@@ -337,10 +339,10 @@ router.get("/fisica/temario", (req, res) => {
 router.get("/fisica/comunidad", async (req, res) => {
     if (req.session.token) {
         if (req.query.apunte) {
-            idApunte = req.query.apunte
+            const idApunte = req.query.apunte
             axios.post("http://localhost:2005/recibirApunte", { idApunte }).then(respuesta => {
                 var apunte = respuesta.data.apunte
-                rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
+                const rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
                 res.download(rutaArchivo, apunte.nombreArchivo, (err) => {
                     if (err) {
                         console.error('Error al descargar el archivo:', err);
@@ -452,8 +454,8 @@ router.get("/castellano", (req, res) => {
 router.get("/castellano/temario", (req, res) => {
     if (req.session.token) {
         if (req.query.archivo) {
-            rutaArchivo = descargar(req.query.archivo)
-            nombreDescarga = `${req.query.archivo}.pdf`
+            const rutaArchivo = descargar(req.query.archivo)
+            const nombreDescarga = `${req.query.archivo}.pdf`
             res.download(rutaArchivo, nombreDescarga, (err) => {
                 if (err) {
                     console.error('Error al descargar el archivo:', err);
@@ -472,10 +474,10 @@ router.get("/castellano/temario", (req, res) => {
 router.get("/castellano/comunidad", async (req, res) => {
     if (req.session.token) {
         if (req.query.apunte) {
-            idApunte = req.query.apunte
+            const idApunte = req.query.apunte
             axios.post("http://localhost:2005/recibirApunte", { idApunte }).then(respuesta => {
                 var apunte = respuesta.data.apunte
-                rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
+                const rutaArchivo = path.join(__dirname, 'public', 'apuntes', apunte.id)
                 res.download(rutaArchivo, apunte.nombreArchivo, (err) => {
                     if (err) {
                         console.error('Error al descargar el archivo:', err);
@@ -585,7 +587,7 @@ router.get("/nosotros", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-    usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya }
+    const usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya }
     axios.post("http://localhost:2005/validar", { usuario }).then(respuesta => {
         if (respuesta.data.token) {
             req.session.token = respuesta.data.token
@@ -595,7 +597,9 @@ router.post("/login", (req, res) => {
         } else {
             res.render("login", { status: "Usuario no encontrado" })
         }
-    })
+    }).catch(err => res.status(err.response?.status === 401 ? 401 : 502).render("login", {
+        status: err.response?.status === 401 ? "Credenciales incorrectas" : "No se pudo iniciar sesión"
+    }))
 })
 
 module.exports = router
