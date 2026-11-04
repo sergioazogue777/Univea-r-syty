@@ -1,5 +1,7 @@
 # Univea-r-syty
 
+Proyecto final del ciclo de Desarrollo de Aplicaciones Web (DAW). Reúne conceptos aprendidos durante la formación y se conserva como trabajo académico. La versión actual incluye una revisión posterior de documentación, validaciones y seguridad.
+
 Proyecto final de Desarrollo de Aplicaciones Web: plataforma educativa desarrollada con Node.js, Express, Handlebars, Bootstrap y Firebase.
 
 ## Tecnologías
