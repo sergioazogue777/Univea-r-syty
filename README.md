@@ -45,9 +45,13 @@ Proyecto final de Desarrollo de Aplicaciones Web: plataforma educativa desarroll
 
 ## Seguridad y limitaciones
 
-Este proyecto es académico y **no está listo para producción**. La autenticación existente compara contraseñas en texto plano; debe migrarse a un algoritmo de hash adaptativo (por ejemplo, Argon2id o bcrypt), sin perder la compatibilidad con los usuarios existentes. Las sesiones usan el almacén en memoria predeterminado de Express, no apto para producción. Se recomienda añadir validación de entradas, protección CSRF, pruebas automatizadas, límites de peticiones y control de acceso granular.
+Este proyecto es académico y **no está listo para producción**. Las contraseñas nuevas se almacenan con scrypt y sal aleatoria, y las contraseñas antiguas se actualizan al iniciar sesión correctamente. **Hasta que todas se migren, los registros antiguos siguen expuestos en la base de datos.** Las sesiones usan el almacén en memoria predeterminado de Express, no apto para producción. Se recomienda completar la validación de entradas, añadir protección CSRF, pruebas de integración, límites de peticiones y control de acceso granular.
 
 Se han retirado los JSON de credenciales de la versión actual del repositorio, pero **siguen presentes en el historial de Git**. Es imprescindible revocar/rotar las claves en Google Cloud y, posteriormente, limpiar el historial de forma coordinada. No reutilices ninguna clave antigua.
+
+## Pruebas
+
+Con las dependencias de `restAPI` instaladas, ejecuta `node --test *.test.js` desde esa carpeta. GitHub Actions verifica la sintaxis de los archivos JavaScript y ejecuta las pruebas unitarias. **Estas comprobaciones no prueban una conexión real con Firestore.**
 
 ## Estado
 
