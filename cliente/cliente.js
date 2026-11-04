@@ -33,9 +33,11 @@ router.post("/registrar", async (req, res) => {
                 } else {
                     res.render("login", { status: "Usuario no encontrado" })
                 }
-            })
+            }).catch(() => res.status(502).render("registro", { status: "No se ha podido iniciar sesión" }))
         }
-    })
+    }).catch(err => res.status(err.response?.status === 400 ? 400 : 502).render("registro", {
+        status: err.response?.data?.info || "No se ha podido completar el registro"
+    }))
 })
 router.get("/matematicas", (req, res) => {
     if (req.session.token) {
@@ -585,7 +587,7 @@ router.get("/nosotros", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-    usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya }
+    const usuario = { correo: req.body.correo, contrasenya: req.body.contrasenya }
     axios.post("http://localhost:2005/validar", { usuario }).then(respuesta => {
         if (respuesta.data.token) {
             req.session.token = respuesta.data.token
@@ -595,7 +597,9 @@ router.post("/login", (req, res) => {
         } else {
             res.render("login", { status: "Usuario no encontrado" })
         }
-    })
+    }).catch(err => res.status(err.response?.status === 401 ? 401 : 502).render("login", {
+        status: err.response?.status === 401 ? "Credenciales incorrectas" : "No se pudo iniciar sesión"
+    }))
 })
 
 module.exports = router
