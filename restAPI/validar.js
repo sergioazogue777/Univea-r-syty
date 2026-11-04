@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     return res.status(500).json({ status: 'error', message: 'JWT_SECRET sin configurar' });
   }
   try {
-    const docs = await db.collection('usuarios').where('correo', '==', usuario.correo).limit(1).get();
+    const docs = await db.collection('usuarios').where('correo', '==', usuario.correo.trim().toLowerCase()).limit(1).get();
     if (docs.empty) return res.status(401).json({ status: 'error', message: 'Credenciales incorrectas' });
     const doc = docs.docs[0];
     const stored = doc.data();
