@@ -1,31 +1,35 @@
-const express = require("express")
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 const db = require('./firebase.js');
-const jwt = require('jsonwebtoken');
+const { verifyToken } = require('./auth');
 
-router.post("/", async (req, res) => {
-    const profesor=req.body.profesor
-    const profesorID = jwt.verify(profesor.persona, "joaquin").foo
-    var datosPersonales
-    const docRef = await db.collection('profesores').doc();
-    const docID=docRef.id
-    await db.collection('usuarios').doc(profesorID).get().then(doc=>{
-        datosPersonales=doc.data()
-    }).catch(error=>{
-        console.log(error)
-    })
-    await db.collection('usuarios').doc(profesorID).update({
-        esProfesor:true
-    }).catch(error=>{
-        console.log(error)
-    })
-    profesor.nombre=datosPersonales.nombre
-    profesor.apellidos=datosPersonales.apellidos
-
-    await docRef.set({apellidos:profesor.apellidos,asignatura:profesor.asignatura,ciudad:profesor.ciudad,descripcion:profesor.descripcion,email:profesor.email,nombre:profesor.nombre,online:profesor.online,telefono:profesor.telefono});
-
-    res.status(200).send({status:"ok",nombreFoto:docID,esProfesor:true})
-
-})
-
-module.exports = router
+router.post('/', async (req, res) => {
+  const profesor = req.body?.profesor;
+  let id;
+  try { id = verifyToken(profesor?.persona).foo; }
+  catch (error) { return res.status(error.statusCode || 500).json({ status: 'error', message: error.message }); }
+  if (!profesor || typeof profesor.asignatura !== 'string' || !profesor.asignatura.trim()) {
+    return res.status(400).json({ status: 'error', message: 'Falta asignatura' });
+  }
+  try {
+    const userRef = db.collection('usuarios').doc(id);
+    const user = await userRef.get();
+    if (!user.exists) return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
+    const { nombre, apellidos } = user.data();
+    const doc = await db.collection('profesores').add({
+      nombre, apellidos,
+      asignatura: profesor.asignatura,
+      ciudad: profesor.ciudad || '',
+      descripcion: profesor.descripcion || '',
+      email: profesor.email || '',
+      online: Boolean(profesor.online),
+      telefono: profesor.telefono || ''
+    });
+    await userRef.update({ esProfesor: true });
+    return res.status(201).json({ status: 'ok', nombreFoto: doc.id, esProfesor: true });
+  } catch (error) {
+    console.error('Error al registrar profesor:', error.message);
+    return res.status(500).json({ status: 'error', message: 'Error interno' });
+  }
+});
+module.exports = router;
