@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   }
   try {
     const existing = await db.collection('usuarios').where('correo', '==', correo).limit(1).get();
-    if (!existing.empty) return res.status(409).json({ status: 'error', info: 'Correo ya en uso' });
+    if (!existing.empty) return res.status(200).json({ status: 'error', info: 'Correo ya en uso' });
     await db.collection('usuarios').add({
       correo,
       contrasenya: await hashPassword(usuario.contrasenya),
